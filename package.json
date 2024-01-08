@@ -46,5 +46,5 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "https://ambulanceforyou-mainserver.onrender.com"
+  "proxy": "'https://api.mapbox.com/styles/v1/mapbox/navigation-preview-day-v2?access_token=%22pk.eyJ1IjoicHVuZGlyYXJ5YW4iLCJhIjoiY2xsa3liaHR5MDg3ZDNmbmZlNGJya2o0bCJ9.ZuENpboVEs7D3XM-qfFs_Q%22"
 }
