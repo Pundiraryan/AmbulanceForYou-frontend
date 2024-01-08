@@ -46,5 +46,5 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "https://ambulanceforyou-mainserver.onrender.com"
+  "proxy": "https://localhost:5000"
 }
