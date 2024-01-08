@@ -5,7 +5,7 @@ import Geocoder from 'react-map-gl-geocoder'
 import "react-map-gl-geocoder/dist/mapbox-gl-geocoder.css";
 import "./App.css";
 
-const socket = socketIOClient("http://localhost:5000");
+const socket = socketIOClient("https://ambulanceforyou-mainserver.onrender.com");
 
 function User() {
   const [displayName, setDisplayName] = useState("");
