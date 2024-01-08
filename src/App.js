@@ -6,7 +6,7 @@ import Geocoder from 'react-map-gl-geocoder';
 import "react-map-gl-geocoder/dist/mapbox-gl-geocoder.css";
 import "./App.css";
 
-const socket = socketIOClient("http://localhost:5000/");
+const socket = socketIOClient("https://ambulanceforyou-mainserver.onrender.com/");
 
 function App(props) {
   const [displayName, setDisplayName] = useState("");
@@ -25,7 +25,7 @@ function App(props) {
   const mapRef = useRef();
   useEffect(() => {
     const myfunc=async ()=>{
-      const response=await Axios.get(`http://localhost:5000/api/ambulance/info/${props.match.params.ambulanceid}`);
+      const response=await Axios.get(`https://ambulanceforyou-mainserver.onrender.com/api/ambulance/info/${props.match.params.ambulanceid}`);
       if(response){
 
         const setAmbulanceLocationvalue = {
