@@ -20,7 +20,7 @@ const AmdDetails = () => {
               coordinates : [ambxc,ambyc]
           }
       }
-      const res=await Axios.post('http://localhost:5000/api/ambulance',dataval);
+      const res=await Axios.post('https://ambulanceforyou-mainserver.onrender.com/api/ambulance',dataval);
       if(res){
           toast('good')
       }
