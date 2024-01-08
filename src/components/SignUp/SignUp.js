@@ -24,7 +24,7 @@ const SignUp = () => {
             address:Add,
             password:Pwd
         }
-        const res =await Axios.post("http://localhost:5000/api/ambulance/auth/signup",data);
+        const res =await Axios.post("https://ambulanceforyou-mainserver.onrender.com/api/ambulance/auth/signup",data);
     }
     return (
         <>
