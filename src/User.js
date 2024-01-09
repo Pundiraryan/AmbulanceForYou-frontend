@@ -94,7 +94,7 @@ function User() {
 
       <div className="map">
       <div className="sidebar">
-      Longitude: {ambulanceLocation.latitude} | Latitude: {ambulanceLocation.longitude}
+      Longitude: {userLocation.latitude} | Latitude: {userLocation.longitude}
       </div>
         <ReactMapGL
           {...viewport}
