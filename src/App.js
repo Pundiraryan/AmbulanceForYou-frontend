@@ -107,12 +107,12 @@ function App(props) {
           ref={mapRef}
           onViewportChange={handleViewportChange}
           mapStyle="mapbox://styles/mapbox/navigation-preview-day-v2"
-          mapboxApiAccessToken={process.env.REACT_APP_MAPBOXAPI}
+          mapboxApiAccessToken="pk.eyJ1Ijoia2cta2FydGlrIiwiYSI6ImNrOGdicTdwZjAwMGUzZW1wZmxpMDdvajcifQ.7FtdVDqPnZh4pCtTtcNf4g"
         >
           <Geocoder
             mapRef={mapRef}
             onViewportChange={handleGeocoderViewportChange}
-            mapboxApiAccessToken={process.env.REACT_APP_MAPBOXAPI}
+            mapboxApiAccessToken="pk.eyJ1Ijoia2cta2FydGlrIiwiYSI6ImNrOGdicTdwZjAwMGUzZW1wZmxpMDdvajcifQ.7FtdVDqPnZh4pCtTtcNf4g"
           />
 
           {Object.keys(userLocation).length !== 0 && (
