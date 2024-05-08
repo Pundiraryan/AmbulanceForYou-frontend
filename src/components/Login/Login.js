@@ -18,12 +18,16 @@ const Login = () => {
             email:Email,
             password:Pwd
         }
+<<<<<<< HEAD
         const res =await Axios.post("http://localhost:5000/api/ambulance/auth/login",data);
         if(res){
             console.log(res.data);
             localStorage.setItem('details',JSON.stringify(res.data.user));
             history.push("/admin");
         }
+=======
+        const res =await Axios.post("https://ambulanceforyou-mainserver.onrender.com/api/ambulance/auth/login",data);
+>>>>>>> f2edfcfb83dd7a3dea51e9174d5481a1ba956ec1
     }
 
     return (

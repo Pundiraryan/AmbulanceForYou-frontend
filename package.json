@@ -30,7 +30,8 @@
   "scripts": {
     "start": "react-scripts start",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "build": "react-scripts build"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -47,8 +48,12 @@
       "last 1 safari version"
     ]
   },
+<<<<<<< HEAD
   "proxy": "http://localhost:5000",
   "devDependencies": {
     "@types/react-router-dom": "^5.3.3"
   }
+=======
+  "proxy": "https://ambulanceforyou-mainserver.onrender.com"
+>>>>>>> f2edfcfb83dd7a3dea51e9174d5481a1ba956ec1
 }

@@ -4,8 +4,13 @@ import ReactMapGL, { Marker } from 'react-map-gl'
 import Geocoder from 'react-map-gl-geocoder'
 import "react-map-gl-geocoder/dist/mapbox-gl-geocoder.css";
 import "./App.css";
+<<<<<<< HEAD
 import RingLoader from "react-spinners/RingLoader";
 const socket = socketIOClient("http://localhost:5000");
+=======
+
+const socket = socketIOClient("https://ambulanceforyou-mainserver.onrender.com");
+>>>>>>> f2edfcfb83dd7a3dea51e9174d5481a1ba956ec1
 
 function User() {
   const [displayName, setDisplayName] = useState("");

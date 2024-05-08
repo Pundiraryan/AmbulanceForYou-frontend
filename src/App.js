@@ -6,8 +6,13 @@ import Geocoder from 'react-map-gl-geocoder';
 
 import "react-map-gl-geocoder/dist/mapbox-gl-geocoder.css";
 import "./App.css";
+<<<<<<< HEAD
 import RingLoader from "react-spinners/RingLoader";
 const socket = socketIOClient("http://localhost:5000/");
+=======
+
+const socket = socketIOClient("https://ambulanceforyou-mainserver.onrender.com/");
+>>>>>>> f2edfcfb83dd7a3dea51e9174d5481a1ba956ec1
 
 function App(props) {
   const [displayName, setDisplayName] = useState("");
@@ -28,7 +33,7 @@ function App(props) {
   const mapRef = useRef();
   useEffect(() => {
     const myfunc=async ()=>{
-      const response=await Axios.get(`http://localhost:5000/api/ambulance/info/${props.match.params.ambulanceid}`);
+      const response=await Axios.get(`https://ambulanceforyou-mainserver.onrender.com/api/ambulance/info/${props.match.params.ambulanceid}`);
       if(response){
 
         const setAmbulanceLocationvalue = {
@@ -136,12 +141,12 @@ function App(props) {
           ref={mapRef}
           onViewportChange={handleViewportChange}
           mapStyle="mapbox://styles/mapbox/navigation-preview-day-v2"
-          mapboxApiAccessToken={process.env.REACT_APP_MAPBOXAPI}
+          mapboxApiAccessToken="pk.eyJ1Ijoia2cta2FydGlrIiwiYSI6ImNrOGdicTdwZjAwMGUzZW1wZmxpMDdvajcifQ.7FtdVDqPnZh4pCtTtcNf4g"
         >
           <Geocoder
             mapRef={mapRef}
             onViewportChange={handleGeocoderViewportChange}
-            mapboxApiAccessToken={process.env.REACT_APP_MAPBOXAPI}
+            mapboxApiAccessToken="pk.eyJ1Ijoia2cta2FydGlrIiwiYSI6ImNrOGdicTdwZjAwMGUzZW1wZmxpMDdvajcifQ.7FtdVDqPnZh4pCtTtcNf4g"
           />
 
           {Object.keys(userLocation).length !== 0 && (
