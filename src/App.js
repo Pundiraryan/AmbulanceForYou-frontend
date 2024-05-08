@@ -3,15 +3,18 @@ import Axios from "axios";
 import socketIOClient from 'socket.io-client';
 import ReactMapGL, { Marker } from 'react-map-gl';
 import Geocoder from 'react-map-gl-geocoder';
+
 import "react-map-gl-geocoder/dist/mapbox-gl-geocoder.css";
 import "./App.css";
-
+import RingLoader from "react-spinners/RingLoader";
 const socket = socketIOClient("http://localhost:5000/");
 
 function App(props) {
   const [displayName, setDisplayName] = useState("");
   const [address, setAddress] = useState("");
   const [patientId, setPatientId] = useState("");
+  const [loading,setloading]=useState(false);
+  const [notfulfilled,setnotfulfilled]=useState(true);
   const [residence, setResidence] = useState("");
   const [viewport, setViewport] = useState({
     width: "75vw",
@@ -42,14 +45,24 @@ function App(props) {
       }else{
         console.log('no ambulance found');
       }
+      // const fres=await Axios.get(`http://localhost:5000/api/request/find/${patientId}`);
+      // if(fres){
+      //   if(!fres.data.found){
+      //     setPatientId("");
+      //     setResidence("");
+      //   }
+      // }else{
+      //   console.log('error in request');
+      // }
     socket.on("request", (eventData) => {
-      const setUserLocationvalue = {
-        latitude: eventData.location.userLocation.latitude,
-        longitude: eventData.location.userLocation.longitude
-      };
-      setPatientId(eventData.patientId);
-      setResidence(eventData.location.addressPatient);
-      setUserLocation(setUserLocationvalue);
+        const setUserLocationvalue = {
+          latitude: eventData.location.userLocation.latitude,
+          longitude: eventData.location.userLocation.longitude
+        };
+        setPatientId(eventData.patientId);
+        setResidence(eventData.location.addressPatient);
+        setUserLocation(setUserLocationvalue);
+      
     });
 
     }
@@ -68,17 +81,33 @@ function App(props) {
     });
   };
 
-  const requestforHelp = () => {
-    socket.emit("request-accepted", {
+  const requestforHelp = async() => {
+    // setloading(true);
+    socket.emit("request-accepted-client", {
       displayName: displayName,
       address: address,
       ambulanceLocation: ambulanceLocation
     });
+    try {
+      const ack=await Axios.post(`http://localhost:5000/api/request/fulfill/${patientId}`);
+      if(ack){
+        if(ack.data.success){
+          setloading(true);
+        }
+      }else{
+        console.log('some problem occured');
+      }
+    } catch (error) {
+      console.log(error);
+    }
+
+    // socket.emit("reques")
   };
 
   return (
     <div>
-      <div className="heading">
+      {!loading && <>
+        <div className="heading">
         {displayName && address ? (
           <div>
             <h3>{displayName}</h3>
@@ -125,6 +154,19 @@ function App(props) {
           )}
         </ReactMapGL>
       </div>
+      </>}
+      {loading && <div style={{
+        display:'flex',
+        justifyContent:'center',
+        flexDirection:'column',
+        alignItems:'center',
+        height:'500px'
+    }}>
+      <p className="logo">Ambulance currently serving another patient..</p>
+      <br />
+      <RingLoader  color="#fd001c" />
+    </div> }
+      
     </div>
   );
 }

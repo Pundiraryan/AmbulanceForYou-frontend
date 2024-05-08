@@ -4,12 +4,14 @@ import ReactMapGL, { Marker } from 'react-map-gl'
 import Geocoder from 'react-map-gl-geocoder'
 import "react-map-gl-geocoder/dist/mapbox-gl-geocoder.css";
 import "./App.css";
-
+import RingLoader from "react-spinners/RingLoader";
 const socket = socketIOClient("http://localhost:5000");
 
 function User() {
   const [displayName, setDisplayName] = useState("");
   const [address, setAddress] = useState("");
+  const [loading,setloading]=useState(false);
+  const [notfulfilled,setnotfulfilled]=useState(true);
   const [addressPatient, setAddressPatient] = useState("");
   const [viewport, setViewport] = useState({
     width: "75vw",
@@ -23,7 +25,28 @@ function User() {
   const mapRef = useRef();
   useEffect(() => {
     // console.log("inside use effect")
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(success, error);
+    } else {
+      console.log("Geolocation not supported");
+    }
+    
+    function success(position) {
+      const latitudeval = position.coords.latitude;
+      const longitudeval = position.coords.longitude;
+      const locationobj={
+        latitude:latitudeval,
+        longitude:longitudeval
+      }
+      setUserLocation(locationobj);
+      // console.log(`Latitude: ${latitude}, Longitude: ${longitude}`);
+    }
+    
+    function error() {
+      alert("Unable to retrieve your location, Please reload the page");
+    }
     socket.on("request-sent", (data) => {
+      setloading(false);
       const setAmbulanceLocationvalue = {
         latitude: data.ambulanceLocation.latitude,
         longitude: data.ambulanceLocation.longitude
@@ -32,13 +55,14 @@ function User() {
       setDisplayName(data.displayName);
       setAddress(data.address);
       setAmbulanceLocation(setAmbulanceLocationvalue);
+      setnotfulfilled(false);
     });
   }, []);
 
   const rfh = () => {
     const requestDetails = {
-      patientId: "1",
-      patientName: "Aryan",
+      patientId:Date.now()+String(10*(Math.random().toFixed(1))),
+      patientName: "RandomUSer",
       location: {
         addressPatient: addressPatient,
         userLocation: userLocation
@@ -46,6 +70,7 @@ function User() {
     };
     // console.log("emitted")
     socket.emit("request-for-help", requestDetails);
+    setloading(true);
   };
 
   // not charng 
@@ -74,12 +99,25 @@ function User() {
 
   return (
     <div>
-      <button type="submit" className="btn btn-primary" onClick={rfh}>
+      {loading && <div style={{
+        display:'flex',
+        justifyContent:'center',
+        flexDirection:'column',
+        alignItems:'center',
+        height:'500px'
+    }}>
+      <p className="logo">Looking for the nearest ambulance..</p>
+      <br />
+      <RingLoader  color="#fd001c" />
+    </div> }
+    {!loading && <>
+      {notfulfilled && <button type="submit" className="btn btn-primary" onClick={rfh}>
         Request For Help
-      </button>
+      </button>}
+      
       <div className="heading">
         {displayName && address ? (
-          <div>
+          <div className="logo">
             <h3>{displayName} is coming to take you</h3>
             <h3> It is here - {address}</h3>
           </div>
@@ -94,7 +132,7 @@ function User() {
 
       <div className="map">
       <div className="sidebar">
-      Longitude: {ambulanceLocation.latitude} | Latitude: {ambulanceLocation.longitude}
+      Longitude: {userLocation.latitude} | Latitude: {userLocation.longitude}
       </div>
         <ReactMapGL
           {...viewport}
@@ -128,6 +166,8 @@ function User() {
           )}
         </ReactMapGL>
       </div>
+    
+    </>}
     </div>
   );
 }

@@ -19,17 +19,24 @@ const Login = () => {
             password:Pwd
         }
         const res =await Axios.post("http://localhost:5000/api/ambulance/auth/login",data);
+        if(res){
+            console.log(res.data);
+            localStorage.setItem('details',JSON.stringify(res.data.user));
+            history.push("/admin");
+        }
     }
 
     return (
         <>
             <div className = 'container-fluid'>
                 <div className = 'row'>
-                    <div className = 'col-lg-7 px-0'>
+                    <div style={{
+                        maxWidth:'50%'
+                    }}>
                         <Banner />
                     </div>
                     <div className = 'col-lg-5 px-0'>
-                        <div className = 'login-container container d-flex justify-content-center'>
+                        <div className = 'login-container  d-flex justify-content-center'>
                            
                             <div className = 'row align-content-between align-items-center'>
                                 <div className = 'col-lg-6'>

@@ -16,6 +16,9 @@ import AmdDetails from './AmdDetails';
 import About from './About';
 import Contact from './Contact';
 import ViewAmbulance from './ViewAmbulance'
+import AdminComponent from './components/hospital/AdminComponent';
+import Services from './components/Services';
+import Loader from './components/Loader';
 ReactDOM.render(
   <React.StrictMode>
   <Auth0Provider
@@ -26,15 +29,18 @@ ReactDOM.render(
   <Router>
   <Navbar/>
     <Switch>
+      <Route path="/admin" component= {AdminComponent} />
+      <Route path="/loader" component= {Loader} />
       <Route path="/contact" component={Contact} />
       <Route path ="/sign-up" component={SignUp} />
       <Route path ="/login" component={Login} />
       <Route path="/ambdetails" component={ViewAmbulance}/>
       <Route path="/about" component={About}/>
+      <Route path="/services" component={Services}/>
       <Route path="/addamb" component={AmdDetails} />
       <Route path="/" exact component={Home}/>
       <Route path ="/emergency" exact component={User} />
-      <Route path="/:ambulanceid" component= {App} />
+      <Route path="/emergency/:ambulanceid" component= {App} />
     </Switch>
   </Router>
   </Auth0Provider>

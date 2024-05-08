@@ -25,27 +25,34 @@ const SignUp = () => {
             password:Pwd
         }
         const res =await Axios.post("http://localhost:5000/api/ambulance/auth/signup",data);
+        console.log(res);
+        if(res){
+            console.log(res);
+            history.push('/login');
+        }
     }
     return (
         <>
             <div className = 'container-fluid'>
                 <div className = 'row'>
-                    <div className = 'col-lg-7 px-0'>
+                    <div style={{
+                        maxWidth:'50%'
+                    }}>
                         <Banner />
                     </div>
                     <div className = 'col-lg-5 px-0'>
-                        <div className = 'sign-up-container container d-flex justify-content-center'>
+                        <div className = 'sign-up-container d-flex justify-content-center'>
                            
                             <div className = 'row align-content-between align-items-center'>
                                 <div className = 'col-lg-6'>
                                 </div>
-                                <div className = 'col-lg-6 d-flex justify-content-end'>
+                                {/* <div className = 'col-lg-6 d-flex justify-content-end'>
                                     <button className = 'btn custom-btn secondary' onClick = {onClickLoginBtn}>
                                         Already have an account?
                                     </button>
-                                </div>
+                                </div> */}
                                 <div className = 'col-lg-12'>
-                                    <h1 className = 'custom-text primary bold mb-2'>Sign Up</h1>
+                                    {/* <h1 className = 'custom-text primary bold mb-2'>Sign Up</h1> */}
                                     <form>
                                         <div className = 'form-group'>
                                             <label>Full Name</label>
@@ -79,7 +86,7 @@ const SignUp = () => {
                                 <div className = 'col-lg-12'>
                                     <p className ='d-flex justify-content-center custom-text secondary'>
                                         {/* insert your company name */}
-                                        © [Your Company]. 2020. All rights reserved.
+                                        © AmbulanceForYou. 2050. All rights reserved.
                                     </p>
                                 </div>
                             </div>

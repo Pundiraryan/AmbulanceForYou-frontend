@@ -8,6 +8,7 @@
 .login-container, .sign-up-container {
     background-color: var(--white);
     height: 100vh;
+    /* width:auto; */
     padding: 56px 64px;
 }
 
@@ -16,7 +17,7 @@
 }
 
 .image-container {
-    background-color: var(--main-bg-color);
+    background-color: #7F1D1D;
     height: 100vh;
     padding: 56px;
     text-align: center;
@@ -43,13 +44,13 @@
 }
 
 .custom-btn.primary {
-    background-color: var(--main-light-color);
-    color: var(--white);
+    background-color: #FF0000;
+    color: white;
 }
 
 .custom-btn.secondary, .input-group.secondary {
-    background-color: var(--main-bg-color);
-    color: var(--main-light-color);
+    background-color: #FF0000;
+    color: white;
 }
 
 .input-group.secondary {
@@ -57,7 +58,7 @@
 }
 
 .custom-text.primary {
-    color: var(--main-light-color);
+    color: #FF0000;
 }
 
 .custom-text.bold {

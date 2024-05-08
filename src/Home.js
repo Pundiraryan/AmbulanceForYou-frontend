@@ -4,14 +4,12 @@ const home = ({automation}) => {
   return (
     <>
      <header>
-        <nav className='l'>
-                <Link to='/emergency'><button className="btn2">Emergency</button> </Link>
-        </nav>
-        <nav className='l'>
-                <div className="logo">
+                <div className="logo" style={{
+                    marginTop:'50px',
+                    marginLeft:'75px'
+                }}>
                     Ambulance For You
                 </div>
-        </nav>
         <div className="container">
             <div className="left">
             <h1>
